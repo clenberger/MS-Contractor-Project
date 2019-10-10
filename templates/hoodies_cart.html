@@ -1,0 +1,24 @@
+<!-- templates/hoodies_cart.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<form method='POST' action='/hoodies'>
+    <fieldset>
+    <legend>Cart</legend>
+    <!-- TITLE -->
+    <!-- <p>
+        <label for='title'>Title</label><br>
+        <input type='text' name='title' />
+    </p>
+    <p>
+        <label for='description'>Description</label><br>
+        <input type='text' name='description' />
+    </p>
+    </fieldset> -->
+
+    <!-- BUTTON -->
+    <p>
+        <button type='submit'>Add to cart</button>
+    </p>
+</form>
+{% endblock %}
