@@ -9,20 +9,20 @@ db = client.get_default_database()
 hoodies = db.hoodies
 cart = db.cart
 
-# hoodies.insert_many([
-#     {'title': 'Cliff', 'description': 'One of the best!'},
-#     {'title': 'Delta', 'description': 'One of the best!'},
-#     {'title': 'Fjord', 'description': 'One of the best!'},
-#     {'title': 'Gulf', 'description': 'One of the best!'},
-#     {'title': 'Hill', 'description': 'One of the best!'},
-#     {'title': 'Lagoon', 'description': 'One of the best!'},
-#     {'title': 'Island', 'description': 'One of the best!'},
-#     {'title': 'Mountain', 'description': 'One of the best!'},
-#     {'title': 'Valley', 'description': 'One of the best!'},
-#     {'title': 'Butte', 'description': 'One of the best!'}
-# ])
+hoodies.insert_many([
+    {'title': 'Cliff', 'description': 'One of the best!'},
+    {'title': 'Delta', 'description': 'One of the best!'},
+    {'title': 'Fjord', 'description': 'One of the best!'},
+    {'title': 'Gulf', 'description': 'One of the best!'},
+    {'title': 'Hill', 'description': 'One of the best!'},
+    {'title': 'Lagoon', 'description': 'One of the best!'},
+    {'title': 'Island', 'description': 'One of the best!'},
+    {'title': 'Mountain', 'description': 'One of the best!'},
+    {'title': 'Valley', 'description': 'One of the best!'},
+    {'title': 'Butte', 'description': 'One of the best!'}
+])
 
-hoodies.drop()
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -90,7 +90,7 @@ def hoodie_edit(hoodie_id):
 
 @app.route('/hoodies/<hoodie_id>', methods=['POST', 'GET'])
 def hoodie_update(hoodie_id):
-    # update_hoodie_id = request.form.get('hoodie_id')
+    update_hoodie_id = request.form.get('hoodie_id')
     updated_hoodie = {
         'title': request.form.get('title'),
         'description': request.form.get('description'),
