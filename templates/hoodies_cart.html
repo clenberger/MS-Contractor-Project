@@ -5,20 +5,13 @@
 <form method='POST' action='/hoodies'>
     <fieldset>
     <legend>Cart</legend>
-    <!-- TITLE -->
-    <!-- <p>
-        <label for='title'>Title</label><br>
-        <input type='text' name='title' />
-    </p>
+    {% for hoodie in cart_hoodie %}
+        <h1>{{hoodie.title}}</h1>
+        <h1>{{hoodie.description}}</h1>
+        <h1>{{hoodie.title}} is in your cart</h1>
+    {% endfor %}
     <p>
-        <label for='description'>Description</label><br>
-        <input type='text' name='description' />
-    </p>
-    </fieldset> -->
-
-    <!-- BUTTON -->
-    <p>
-        <button type='submit'>Add to cart</button>
+        <button type='submit'>Back to all hoodies!</button>
     </p>
 </form>
 {% endblock %}

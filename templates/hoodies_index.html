@@ -4,8 +4,12 @@
 {% block content %}
     <h1>Hoody.</h1>
     <a href='/hoodies/cart'>View Cart</a>
-    {% for hoodie in hoodies %}
-        <h2>{{ hoodie.title }}</h2>
-        <small>{{ hoodie.description }}</small>
-    {% endfor %}
+
+    {% if hoody_items %}
+        {% for hoodie in hoody_items %}
+            <h2><a href='/hoodies/{{ hoodie._id }}'>{{ hoodie.title }}</a></h2>
+            <small>{{ hoodie.description }}</small>
+            {% include '/partials/add_to_cart_button.html' %}
+        {% endfor %}
+    {% endif %}
 {% endblock %}
