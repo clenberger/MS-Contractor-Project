@@ -84,8 +84,9 @@ def cart_delete(hoodie_id):
 def hoodie_edit(hoodie_id):
     """Submit an edited hoodie."""
     hoodie = hoodies.find_one({'_id': ObjectId(hoodie_id)})
-    
     return render_template('hoodies_update.html', hoodie=hoodie)
+
+
 
 @app.route('/hoodies/<hoodie_id>/edit', methods=['POST'])
 def hoodie_update(hoodie_id):
