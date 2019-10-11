@@ -80,15 +80,15 @@ def cart_delete(hoodie_id):
     return redirect(url_for('hoodies_cart'))
 
 
-@app.route('/hoodies/<hoodie_id>/edit', methods=['POST'])
+@app.route('/hoodies/<hoodie_id>/edit', methods=['POST', 'GET'])
 def hoodie_edit(hoodie_id):
-    """Submit an edited hoodie."""
+    """Get an edit hoodie."""
     hoodie = hoodies.find_one({'_id': ObjectId(hoodie_id)})
-    return render_template('hoodies_update.html', hoodie=hoodie)
+    return render_template('hoodie_update.html', hoodie=hoodie)
 
 
 
-@app.route('/hoodies/<hoodie_id>/edit', methods=['POST'])
+@app.route('/hoodies/<hoodie_id>', methods=['POST', 'GET'])
 def hoodie_update(hoodie_id):
     update_hoodie_id = request.form.get('hoodie_id')
     updated_hoodie = {
@@ -98,7 +98,7 @@ def hoodie_update(hoodie_id):
     hoodies.update_one(
         {'_id': ObjectId(update_hoodie_id)},
         {'$set': updated_hoodie})
-    return render_template('hoodies_index.html', hoodie_id=update_hoodie_id)
+    return render_template('hoodies_index.html', hoodie_id=hoodie_id)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))
