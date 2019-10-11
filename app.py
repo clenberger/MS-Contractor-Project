@@ -3,7 +3,7 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 import os
 
-host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27018/Contractor')
+host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Contractor')
 client = MongoClient(host=f'{host}?retryWrites=false')
 db = client.get_default_database()
 hoodies = db.hoodies
@@ -46,7 +46,7 @@ def single_hoodie_view(hoodie_id):
 
 # This route returns the hoodies cart page
 @app.route('/hoodies/cart')
-def hoddies_cart():
+def hoodies_cart():
     """Create a new cart"""
     cart_hoodie = cart.find()
     return render_template('hoodies_cart.html', cart_hoodie=cart_hoodie)
@@ -72,7 +72,7 @@ def user_cart_add():
     cart.insert_one(new_cart_item)
     return redirect(url_for('hoodies_index'))
 
-@app.route('/hoodies/<hoodie_id>/delete', methods=['POST'])
+@app.route('/hoodies/cart/delete', methods=['POST'])
 def cart_delete(hoodie_id):
     """Delete a hoodie."""
     cart_id = request.form.get('hoodies._id')
@@ -80,9 +80,15 @@ def cart_delete(hoodie_id):
     return redirect(url_for('hoodies_cart'))
 
 
-@app.route('/hoodies/{{hoodie._id}}/edit', methods=['POST'])
-def hoodie_update(hoodie_id):
+@app.route('/hoodies/<hoodie_id>/edit', methods=['POST'])
+def hoodie_edit(hoodie_id):
     """Submit an edited hoodie."""
+    hoodie = hoodies.find_one({'_id': ObjectId(hoodie_id)})
+    
+    return render_template('hoodies_update.html', hoodie=hoodie)
+
+@app.route('/hoodies/<hoodie_id>/edit', methods=['POST', 'GET'])
+def hoodie_update(hoodie_id):
     update_hoodie_id = request.form.get('hoodie_id')
     updated_hoodie = {
         'title': request.form.get('title'),
@@ -91,8 +97,7 @@ def hoodie_update(hoodie_id):
     hoodies.update_one(
         {'_id': ObjectId(update_hoodie_id)},
         {'$set': updated_hoodie})
-    return render_template('hoodies_update.html', hoodie_id=hoodie_id)
-
+    return render_template('hoodies_index.html', hoodie_id=update_hoodie_id)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))
