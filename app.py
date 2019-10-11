@@ -88,7 +88,7 @@ def hoodie_edit(hoodie_id):
 
 
 
-@app.route('/hoodies/<hoodie_id>/update', methods=['POST', 'GET'])
+@app.route('/hoodies/<hoodie_id>', methods=['POST', 'GET'])
 def hoodie_update(hoodie_id):
     update_hoodie_id = request.form.get('hoodie_id')
     updated_hoodie = {
@@ -98,7 +98,7 @@ def hoodie_update(hoodie_id):
     hoodies.update_one(
         {'_id': ObjectId(update_hoodie_id)},
         {'$set': updated_hoodie})
-    return render_template('hoodies_index.html', hoodie_id=hoodie_id)
+    return render_template('hoodies_index.html', updated_hoodie=updated_hoodie)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))
