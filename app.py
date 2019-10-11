@@ -98,7 +98,7 @@ def hoodie_update(hoodie_id):
     hoodies.update_one(
         {'_id': ObjectId(update_hoodie_id)},
         {'$set': updated_hoodie})
-    return render_template('hoodies_index.html', updated_hoodie=updated_hoodie)
+    return render_template('hoodies_index.html', hoodie=updated_hoodie)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))
