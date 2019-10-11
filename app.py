@@ -22,7 +22,7 @@ cart = db.cart
 #     {'title': 'Butte', 'description': 'One of the best!'}
 # ])
 
-
+hoodies.drop()
 app = Flask(__name__)
 
 @app.route('/')
@@ -90,7 +90,7 @@ def hoodie_edit(hoodie_id):
 
 @app.route('/hoodies/<hoodie_id>', methods=['POST', 'GET'])
 def hoodie_update(hoodie_id):
-    update_hoodie_id = request.form.get('hoodie_id')
+    # update_hoodie_id = request.form.get('hoodie_id')
     updated_hoodie = {
         'title': request.form.get('title'),
         'description': request.form.get('description'),
