@@ -9,18 +9,18 @@ db = client.get_default_database()
 hoodies = db.hoodies
 cart = db.cart
 
-hoodies.insert_many([
-    {'title': 'Cliff', 'description': 'One of the best!'},
-    {'title': 'Delta', 'description': 'One of the best!'},
-    {'title': 'Fjord', 'description': 'One of the best!'},
-    {'title': 'Gulf', 'description': 'One of the best!'},
-    {'title': 'Hill', 'description': 'One of the best!'},
-    {'title': 'Lagoon', 'description': 'One of the best!'},
-    {'title': 'Island', 'description': 'One of the best!'},
-    {'title': 'Mountain', 'description': 'One of the best!'},
-    {'title': 'Valley', 'description': 'One of the best!'},
-    {'title': 'Butte', 'description': 'One of the best!'}
-])
+# hoodies.insert_many([
+#     {'title': 'Cliff', 'description': 'One of the best!'},
+#     {'title': 'Delta', 'description': 'One of the best!'},
+#     {'title': 'Fjord', 'description': 'One of the best!'},
+#     {'title': 'Gulf', 'description': 'One of the best!'},
+#     {'title': 'Hill', 'description': 'One of the best!'},
+#     {'title': 'Lagoon', 'description': 'One of the best!'},
+#     {'title': 'Island', 'description': 'One of the best!'},
+#     {'title': 'Mountain', 'description': 'One of the best!'},
+#     {'title': 'Valley', 'description': 'One of the best!'},
+#     {'title': 'Butte', 'description': 'One of the best!'}
+# ])
 
 
 app = Flask(__name__)
@@ -98,7 +98,8 @@ def hoodie_update(hoodie_id):
     hoodies.update_one(
         {'_id': ObjectId(update_hoodie_id)},
         {'$set': updated_hoodie})
-    return render_template('hoodies_index.html', hoodie=updated_hoodie)
+    return redirect(url_for('hoodie_show'))
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))
