@@ -8,20 +8,9 @@ db = client.Contractor
 hoodies = db.hoodies
 cart = db.cart
 
-hoodies.insert_many([
-    {'title': 'Cliff', 'description': 'One of the best!'},
-    {'title': 'Delta', 'description': 'One of the best!'},
-    {'title': 'Fjord', 'description': 'One of the best!'},
-    {'title': 'Gulf', 'description': 'One of the best!'},
-    {'title': 'Hill', 'description': 'One of the best!'},
-    {'title': 'Lagoon', 'description': 'One of the best!'},
-    {'title': 'Island', 'description': 'One of the best!'},
-    {'title': 'Mountain', 'description': 'One of the best!'},
-    {'title': 'Valley', 'description': 'One of the best!'},
-    {'title': 'Butte', 'description': 'One of the best!'}
-])
 
-cart.drop()
+
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -54,7 +43,7 @@ def hoddies_cart():
 #This route takes you from home and returns the hoodies index page
 @app.route('/hoodies', methods=['POST'])
 def hoodies_show():
-    """Submit a new playlist."""
+    
     print(request.form.to_dict())
     return redirect(url_for('hoodies_index'))
 
@@ -70,6 +59,28 @@ def user_cart_add():
     }
     cart.insert_one(new_cart_item)
     return redirect(url_for('hoodies_index'))
+
+@app.route('/hoodies/<hoodie_id>/delete', methods=['POST'])
+def cart_delete(cart_id):
+    """Delete a hoodie."""
+    cart_id = request.form.get('hoodies_id')
+    cart.delete_one({'_id': ObjectId(cart_id)})
+    return redirect(url_for('hoodies_cart'))
+    
+
+@app.route('/hoodies/{{hoodie._id}}/edit', methods=['POST'])
+def hoodie_update(hoodie_id):
+    """Submit an edited hoodie."""
+    update_hoodie_id = request.form.get('hoodie_id')
+    updated_hoodie = {
+        'title': request.form.get('title'),
+        'description': request.form.get('description'),
+    }
+    hoodies.update_one(
+        {'_id': ObjectId(update_hoodie_id)},
+        {'$set': updated_hoodie})
+    return render_template('hoodies_update.html', hoodie_id=hoodie_id)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

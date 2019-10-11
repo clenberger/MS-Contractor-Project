@@ -1,0 +1,27 @@
+<!-- templates/hoodie_update.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+        <form method='POST' action='/hoodies/<hoodie_id>/edit'>
+            <fieldset>
+                <legend>Can you come up with a better name or description?</legend>
+        <!-- TITLE -->
+                <p>
+                    <label for='hoodie-title'>Title</label><br>
+                    <input id='hoodie-title' type='text' name='title' value='{{ hoodie_id.title }}'/>
+                </p>
+
+        <!-- DESCRIPTION -->
+                <p>
+                    <label for='description'>Description</label><br>
+                    <input id='description' type='text' name='description' value='{{ hoodie_id.description }}' />
+                </p>
+
+            </fieldset>
+
+    <!-- BUTTON -->
+            <p>
+                <button type='submit'>Save Hoody!</button>
+            </p>
+        </form>
+{% endblock %}

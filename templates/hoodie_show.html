@@ -2,7 +2,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<a href='/hoodies'>Back to Hoody!</a>
+    <a href='/hoodies'>Back to Hoody!</a>
     <h1>{{ hoodie.title }}</h1>
     <h2>{{ hoodie.description }}</h2>
+    {% include '/partials/edit_item_button.html' %}
 {% endblock %}

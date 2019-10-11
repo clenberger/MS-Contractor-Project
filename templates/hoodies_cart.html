@@ -6,9 +6,17 @@
     <fieldset>
     <legend>Cart</legend>
     {% for hoodie in cart_hoodie %}
-        <h1>{{hoodie.title}}</h1>
-        <h1>{{hoodie.description}}</h1>
-        <h1>{{hoodie.title}} is in your cart</h1>
+        <h1>Item:</h1>
+        <h3>{{hoodie.title}}</h3>
+        <h3>{{hoodie.description}}</h3>
+        <h3>{{hoodie.title}} is in your cart</h3>
+        <!-- <p>
+            <form method='POST' action='/hoodies/{{ hoodie._id }}/delete'>
+                <button type='submit'>Delete</button>
+            </form>
+        </p> -->
+        {% include '/partials/delete_item_button.html' %}
+        <p>____________________________________________________________________________</p>
     {% endfor %}
     <p>
         <button type='submit'>Back to all hoodies!</button>
