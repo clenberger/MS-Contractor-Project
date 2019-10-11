@@ -87,7 +87,7 @@ def hoodie_edit(hoodie_id):
     
     return render_template('hoodies_update.html', hoodie=hoodie)
 
-@app.route('/hoodies/<hoodie_id>/edit', methods=['POST', 'GET'])
+@app.route('/hoodies/<hoodie_id>/edit', methods=['POST'])
 def hoodie_update(hoodie_id):
     update_hoodie_id = request.form.get('hoodie_id')
     updated_hoodie = {
