@@ -3,7 +3,7 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 import os
 
-host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Contractor')
+host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27018/Contractor')
 client = MongoClient(host=f'{host}?retryWrites=false')
 db = client.Contractor
 hoodies = db.hoodies
@@ -21,7 +21,7 @@ def index():
 
 
 # This route loads hoodies index and populates page with items in db.hoodies
-@app.route('/hoodies')
+@app.route('/hoodies', methods=['POST'])
 def hoodies_index():
     """Show all hoodies."""
     hoody_items = hoodies.find()
