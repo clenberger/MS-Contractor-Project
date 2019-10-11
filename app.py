@@ -9,7 +9,18 @@ db = client.get_default_database()
 hoodies = db.hoodies
 cart = db.cart
 
-
+hoodies.insert_many([
+    {'title': 'Cliff', 'description': 'One of the best!'},
+    {'title': 'Delta', 'description': 'One of the best!'},
+    {'title': 'Fjord', 'description': 'One of the best!'},
+    {'title': 'Gulf', 'description': 'One of the best!'},
+    {'title': 'Hill', 'description': 'One of the best!'},
+    {'title': 'Lagoon', 'description': 'One of the best!'},
+    {'title': 'Island', 'description': 'One of the best!'},
+    {'title': 'Mountain', 'description': 'One of the best!'},
+    {'title': 'Valley', 'description': 'One of the best!'},
+    {'title': 'Butte', 'description': 'One of the best!'}
+])
 
 
 app = Flask(__name__)
@@ -21,7 +32,7 @@ def index():
 
 
 # This route loads hoodies index and populates page with items in db.hoodies
-@app.route('/hoodies', methods=['POST'])
+@app.route('/hoodies')
 def hoodies_index():
     """Show all hoodies."""
     hoody_items = hoodies.find()
